@@ -1,6 +1,8 @@
 <html>
     <?php
-        $name = $_POST['firstname']. ' ' . $_POST['lastname'];
+    
+        $first_name = $_POST['firstname'];
+        $last_name = $_POST['lastname'];
         $when_it_happened = $_POST['whenithappened'];
         $how_long = $_POST['howlong'];        
         $how_many = $_POST['howmany'];    
@@ -8,7 +10,19 @@
         $what_they_did = $_POST['whattheydid'];    
         $fang_spotted = $_POST['fangspotted'];    
         $other = $_POST['other'];    
-        $email = $_POST['email'];    
+        $email = $_POST['email'];
+    
+    $dbc = mysqli_connect('localhost', 'root', '', 'aliendatabase')
+            or die ('Erro de conexão ao Servidor MySQL.');
+    
+        $query ="INSERT INTO aliens_abduction (first_name, last_name, when_it_happened, how_long, " .
+            "how_many, alien_description, what_they_did, fang_spotted, other, email) " .
+            "VALUES ('$first_name', '$last_name', '$when_it_happened', '$how_long', '$how_many', '$alien_description', '$what_they_did', '$fang_spotted', '$other', '$email')";
+    
+        $result = mysqli_query($dbc, $query)
+            or die('Error Querying database.');
+        
+        mysqli_close($dbc);
     
     /* MENSAGEM PELO EMAIL */
     
